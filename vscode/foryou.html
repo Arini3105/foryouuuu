@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For You</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+    }
+
+    .nav {
+      position: absolute;
+      top: 14px;
+      display: flex;
+      gap: 6px;
+    }
+
+    .love-btn {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: none;
+      background: radial-gradient(circle at top left, #ff5f7e, #c9184a);
+      color: #fff;
+      font-size: 26px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+      transition: all 0.35s ease;
+      animation: pulse 2s infinite;
+    }
+
+    .love-btn:hover {
+      transform: scale(1.15);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    .nav button:hover {
+      opacity: 1;
+      background: #fff;
+      color: #111;
+    }
+
+    /* Kotak Surat */
+    .envelope {
+      width: 90%;
+      max-width: 420px;
+      height: 260px;
+      background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+      border-radius: 16px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+      padding: 26px;
+      text-align: center;
+      color: #ffffff;
+      animation: float 4s ease-in-out infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .slide {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 38px;
+      margin: 0;
+      letter-spacing: 1px;
+    }
+
+    p {
+      font-size: 18px;
+      margin: 0;
+    }
+
+    .btn {
+      margin-top: 18px;
+      padding: 10px 28px;
+      border-radius: 30px;
+      border: none;
+      background: linear-gradient(135deg, #ffffff, #cfd9df);
+      color: #111;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      font-weight: 500;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      background: #ffffff;
+    }
+
+    .creator {
+      font-size: 13px;
+      opacity: 0.7;
+      margin-top: 10px;
+    }
+
+    .envelope::after {
+      content: '';
+      position: absolute;
+      bottom: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70px;
+      height: 8px;
+      background: rgba(255,255,255,0.18);
+      filter: blur(10px);
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- AUDIO (GANTI DENGAN FILE LAGU KAMU) -->
+  <audio id="bgMusic" loop>
+    <source src="ga romantis.mp3" type="audio/mpeg">
+    Browser kamu tidak mendukung audio.
+  </audio>
+
+  <div class="envelope">
+
+    <!-- Navigation -->
+    <!-- Navigation -->
+    <div class="nav">
+      <button class="love-btn" onclick="nextSlide()" aria-label="Next">
+        ❤
+      </button>
+    </div>
+
+    <!-- Slide 1 -->
+    <div class="slide active">
+      <h1>Hello!</h1>
+      <button class="btn" onclick="nextSlide()">For you...</button>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide">
+      <p>Semangat yaaa kerjanya 😊</p>
+      <div class="creator">@HiLibra</div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide">
+      <p>Capek boleh, nyerah jangan 💪</p>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="slide">
+      <p>Semua usaha kamu pasti ada hasilnya ✨</p>
+    </div>
+
+    <!-- Slide 5 -->
+    <div class="slide">
+      <p>Aku percaya kamu bisa lewatin hari ini 🤍</p>
+    </div>
+
+    <!-- Slide 6 -->
+    <div class="slide">
+      <p>Tetap jadi versi terbaik dari dirimu sendiri 🔥</p>
+    </div>
+
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const music = document.getElementById('bgMusic');
+    let index = 0;
+
+    function showSlide(n) {
+      slides.forEach(slide => slide.classList.remove('active'));
+      slides[n].classList.add('active');
+      index = n;
+      music.play();
+    }
+
+    function nextSlide() {
+      let next = index + 1;
+      if (next >= slides.length) next = 0;
+      showSlide(next);
+    }
+
+    
+
+    function nextSlide() {
+      let next = index + 1;
+      if (next >= slides.length) next = 0;
+      showSlide(next);
+    }
+
+    function goSlide(n) {
+      showSlide(n);
+    }
+  </script>
+
+</body>
+</html>
